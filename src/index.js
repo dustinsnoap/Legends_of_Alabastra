@@ -1,17 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+//IMPORTS
+import React from 'react'
+import ReactDOM from 'react-dom'
+import * as serviceWorker from './serviceWorker'
+
+//ROUTER
+import Router from './router'
+
+//STYLE
+import GlobalStyle from './style/global'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <GlobalStyle/>
+    <main className='app'>
+      <Router/>
+    </main>
   </React.StrictMode>,
-  document.getElementById('root')
-);
+  document.getElementsByTagName('body')[0]
+)
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+serviceWorker.unregister()
