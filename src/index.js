@@ -9,14 +9,13 @@ import Router from './router'
 //STYLE
 import GlobalStyle from './style/global'
 
+//APP
 ReactDOM.render(
   <React.StrictMode>
     <GlobalStyle/>
-    <main className='app'>
-      <Router/>
-    </main>
+    <Router/>
   </React.StrictMode>,
-  document.getElementsByTagName('body')[0]
+  document.getElementsByTagName('app')[0]
 )
 
 serviceWorker.unregister()

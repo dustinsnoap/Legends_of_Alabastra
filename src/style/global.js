@@ -10,4 +10,9 @@ export default createGlobalStyle`
     ${reset}
     ${fonts}
     ${common}
+
+    body {
+        background-color: #111;
+        color: #ccc;
+    }
 `
