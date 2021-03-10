@@ -2,7 +2,8 @@
 import React from 'react'
 
 //COMPONENTS
-import Background from './components/background'
+// import Background from './components/background'
+import Background from './components/background/index'
 
 //ASSETS
 
