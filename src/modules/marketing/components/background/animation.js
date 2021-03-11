@@ -16,7 +16,7 @@ class Animation extends Component {
                     height: window.innerHeight,
                 },
                 waves: {
-                    amount: 100,
+                    amount: 50,
                     chance_of_ripple: .1,
                     speed: 10, //pixels per second
                     y_start: .5,
