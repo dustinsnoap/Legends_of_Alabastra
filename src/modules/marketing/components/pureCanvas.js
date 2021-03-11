@@ -7,9 +7,6 @@ class PureCanvas extends Component {
     // However; it also prevents DidComponentUpdate from running;
     // which is responsible for drawing to the canvas
     // This also helps prevent stuttering.
-    constructor(props) {
-        super(props)
-    }
     shouldComponentUpdate = () => false
     componentDidMount = () => {
         this.resize_canvas()
