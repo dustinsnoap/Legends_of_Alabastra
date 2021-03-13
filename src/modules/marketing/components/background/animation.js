@@ -1,6 +1,5 @@
 //IMPORTS
 import React, {Component} from 'react'
-import wave from './assets/wave'
 
 //COMPONENTS
 import Canvas from './drawing'
