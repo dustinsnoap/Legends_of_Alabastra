@@ -17,8 +17,8 @@ class PureCanvas extends Component {
     }
     resize_canvas = () => {
         const canvas = document.getElementsByClassName('background')[0]
-        canvas.width = window.innerWidth
-        canvas.height = window.innerHeight
+        canvas.width = Math.ceil(240* window.innerWidth/window.innerHeight)
+        canvas.height = 240
     }
     render = () => 
         <canvas

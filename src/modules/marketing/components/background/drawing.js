@@ -5,6 +5,8 @@ import React, {Component} from 'react'
 import PureCanvas from '../pureCanvas'
 
 //ASSETS
+import background from './assets/background'
+import horizon from './assets/horizon'
 import wave from './assets/wave'
 
 class Canvas extends Component {
@@ -21,7 +23,6 @@ class Canvas extends Component {
             // sets up a squared pixel based on the height of the browser window
             // The NES had 240 vertical scan lines; pixel size is based on the screen height / 240
             resolution: {
-                pixel_size: window.innerHeight / 240,
                 height: 240,
                 width: Math.floor(window.innerWidth / (window.innerHeight / 240))
             }
@@ -29,10 +30,11 @@ class Canvas extends Component {
     }
     create_assets = () => {
         console.log('creating assets...')
-        const pixel_size = window.innerHeight / 240 //copied from set resolution
         this.setState({
             assets: {
-                wave: wave(pixel_size, ['#5881a5','#3b6d97','#4878a0','#3d6d95'], 4, 75),
+                background: background(['#64b9f9', '#215786'], Math.ceil(window.innerWidth / (window.innerHeight / 240))),
+                wave: wave(['#5881a5','#3b6d97','#4878a0','#3d6d95'], 4, 75),
+                horizon: horizon(['#cce8fd', '#b1deff', '#97d2fe', '#61a6dd', '#5682a5', '#47799e', '#3c6d95', '#2d638f'], Math.ceil(window.innerWidth / (window.innerHeight / 240))),
             }
         })
     }
@@ -41,15 +43,10 @@ class Canvas extends Component {
         this.create_assets()
     }
     componentDidUpdate = () => {
-        this.ctx.clearRect(0, 0, window.innerWidth, window.innerHeight)
-        // this.ctx.drawImage(wave(this.state.resolution.pixel_size, ['red','green','purple','yellow'], 200), 0, 0)
-        const res = this.state.resolution
-        // all drawing goes here
-        this.props.waves.forEach(wave => {
-            this.ctx.drawImage(this.state.assets.wave, Math.floor(wave.x), Math.floor(wave.y*res.height*res.pixel_size))
-            // this.ctx.fillStyle = wave.color
-            // this.ctx.fillRect(Math.round(wave.x), Math.round(wave.y*res.height*res.pixel_size), wave.length, res.pixel_size)
-        })
+        this.ctx.clearRect(0, 0, this.state.resolution.width, this.state.resolution.height)
+        this.ctx.drawImage(this.state.assets.background, 0, 0)
+        this.ctx.drawImage(this.state.assets.horizon,0,105)
+        this.props.waves.forEach(wave => this.ctx.drawImage(this.state.assets.wave,wave.x,wave.y))
     }
     saveContext = (ctx) => this.ctx = ctx
     render = () => {

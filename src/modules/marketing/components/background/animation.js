@@ -1,5 +1,6 @@
 //IMPORTS
 import React, {Component} from 'react'
+import wave from './assets/wave'
 
 //COMPONENTS
 import Canvas from './drawing'
@@ -16,9 +17,9 @@ class Animation extends Component {
                     height: window.innerHeight,
                 },
                 waves: {
-                    amount: 50,
-                    chance_of_ripple: .1,
-                    speed: 10, //pixels per second
+                    amount: 40,
+                    chance_of_ripple: .2,
+                    speed: 30, //pixels per second
                     y_start: .5,
                     y_end: 1,
                     length: Math.floor(window.innerWidth / 5),
@@ -52,21 +53,19 @@ class Animation extends Component {
     random_between = (min, max, precision=1) => Math.floor(Math.random() * (max * (1/precision) - min * (1/precision)) + min * (1/precision))/(1/precision)
     //DRAWING -- Initial object creation, size, position, etc.
     move_waves = () => {
+        const canvas_width = document.getElementsByClassName('background')[0].width
+        const settings = this.state.settings
         this.setState(prev => {
-            prev.waves.map(wave => wave.x < window.innerWidth ? wave.x += wave.speed*(window.innerHeight/240)/prev.settings.fps : this.create_wave(wave))
+            prev.waves.map(wave => wave.x < canvas_width ? wave.x += settings.waves.speed/settings.fps : this.create_wave(wave))
             return {waves: prev.waves}
         })
     }
     create_wave = (wave={}) => {
         const settings = this.state.settings.waves
-        const type = Math.random() < settings.chance_of_ripple ? 'ripple' : 'wave'
-        const x = wave.x ? -Math.random() * window.innerWidth - settings.length : (Math.random()-.5) * window.innerWidth*2
-        wave.type = type
-        wave.x = x
-        wave.y = this.random_between(settings.y_start, settings.y_end, .01)
-        wave.color = 'red'
-        wave.speed = settings.speed
-        wave.length = type === 'ripple' ? Math.floor(settings.length/3) : settings.length
+        const {width, height} = document.getElementsByClassName('background')[0]
+        wave.type = Math.random() < settings.chance_of_ripple ? 'ripple' : 'wave'
+        wave.x = wave.x ? this.random_between(-width, -75) : this.random_between(-width, width)
+        wave.y = this.random_between(Math.floor(height/2), height)
         return wave
     }
     create_waves = () => {
