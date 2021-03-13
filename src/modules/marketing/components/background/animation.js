@@ -15,6 +15,12 @@ class Animation extends Component {
                     width: window.innerWidth,
                     height: window.innerHeight,
                 },
+                clouds: {
+                    amount: 10,
+                    speed: 10,
+                    y_start: 0,
+                    y_end: .4
+                },
                 waves: {
                     amount: 40,
                     chance_of_ripple: .2,
@@ -26,12 +32,14 @@ class Animation extends Component {
                 },
             },
             waves: [],
+            clouds: [],
         }
         this.updateAnimationState = this.updateAnimationState.bind(this)
     }
     //LIFECYCLE
     componentDidMount = () => {
         this.rAF = requestAnimationFrame(this.updateAnimationState)
+        this.create_clouds()
         this.create_waves()
     }
     updateAnimationState = () => {
@@ -41,6 +49,7 @@ class Animation extends Component {
                 let elasped_time = now - start_time
                 if(elasped_time > 1000 / this.state.settings.fps) {
                     start_time = now
+                    this.move_clouds()
                     this.move_waves()
                 }
                 requestAnimationFrame(rAFCallback)
@@ -67,13 +76,33 @@ class Animation extends Component {
         wave.y = this.random_between(Math.floor(height/2), height)
         return wave
     }
+    move_clouds = () => {
+        const canvas_width = document.getElementsByClassName('background')[0].width
+        const settings = this.state.settings
+        this.setState(prev => {
+            prev.clouds.map(cloud => cloud.x < canvas_width ? cloud.x += settings.clouds.speed/settings.fps : this.create_cloud(cloud))
+            return {clouds: prev.clouds}
+        })
+    }
     create_waves = () => {
         let waves = []
         for(let num=0; num<this.state.settings.waves.amount; num++) waves.push(this.create_wave())
         this.setState({waves})
     }
-    render = () => 
-        <Canvas waves={this.state.waves} />
+    create_cloud = (cloud={}) => {
+        const settings = this.state.settings.clouds
+        const {width, height} = document.getElementsByClassName('background')[0]
+        cloud.x = cloud.x ? this.random_between(-width, -100) : this.random_between(-width, width)
+        cloud.y = this.random_between(Math.floor(height*settings.y_start), Math.floor(height*settings.y_end))
+        return cloud
+    }
+    create_clouds = () => {
+        let clouds = []
+        for(let num=0; num<this.state.settings.clouds.amount; num++) clouds.push(this.create_cloud())
+        this.setState({clouds})
+    }
+    render = () =>
+        <Canvas clouds={this.state.clouds} waves={this.state.waves} />
 }
 
 //EXPORTS

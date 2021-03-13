@@ -47,8 +47,7 @@ class Canvas extends Component {
     componentDidUpdate = () => {
         this.ctx.clearRect(0, 0, this.state.resolution.width, this.state.resolution.height)
         this.ctx.drawImage(this.state.assets.background, 0, 0)
-        // console.log(this.state.assets.background)
-        this.ctx.drawImage(this.state.assets.cloud, 0, 0)
+        this.props.clouds.forEach(cloud => this.ctx.drawImage(this.state.assets.cloud, cloud.x, cloud.y))
         this.ctx.drawImage(this.state.assets.horizon,0,105)
         this.props.waves.forEach(wave => this.ctx.drawImage(this.state.assets.wave,wave.x,wave.y))
     }
