@@ -17,14 +17,14 @@ class Animation extends Component {
                 },
                 clouds: {
                     amount: 10,
-                    speed: 10,
+                    speed: 5,
                     y_start: 0,
                     y_end: .4
                 },
                 waves: {
                     amount: 40,
                     chance_of_ripple: .2,
-                    speed: 30, //pixels per second
+                    speed: 10, //pixels per second
                     y_start: .5,
                     y_end: 1,
                     length: Math.floor(window.innerWidth / 5),
