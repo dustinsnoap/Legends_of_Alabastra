@@ -37,7 +37,7 @@ class Canvas extends Component {
                 background: background(['#64b9f9', '#215786'], Math.ceil(window.innerWidth / (window.innerHeight / 240))),
                 wave: wave(['#5881a5','#3b6d97','#4878a0','#3d6d95'], 4, 75),
                 horizon: horizon(['#cce8fd', '#b1deff', '#97d2fe', '#61a6dd', '#5682a5', '#47799e', '#3c6d95', '#2d638f'], Math.ceil(window.innerWidth / (window.innerHeight / 240))),
-                cloud: cloud(['#ffffff']),
+                // cloud: cloud(['#ffffff']),
                 title: title(['#8e6e00'])
             }
         })
@@ -48,7 +48,7 @@ class Canvas extends Component {
     }
     componentDidUpdate = () => {
         this.ctx.drawImage(this.state.assets.background, 0, 0)
-        this.props.clouds.forEach(cloud => this.ctx.drawImage(this.state.assets.cloud, cloud.x, cloud.y))
+        // this.props.clouds.forEach(cloud => this.ctx.drawImage(this.state.assets.cloud, cloud.x, cloud.y))
         this.ctx.drawImage(this.state.assets.horizon,0,105)
         const title_x = Math.floor((this.state.resolution.width - this.state.assets.title.width) / 2)
         this.ctx.drawImage(this.state.assets.title, title_x, 30)

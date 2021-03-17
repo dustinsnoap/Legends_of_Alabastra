@@ -1,3 +1,6 @@
+//IMPORTS
+import {compress_tileset, decompress_tileset} from './compression'
+
 //TOOLS
 const draw_tile = (tile, colors=['#fff'], w=8, h=8) => {
 	const canvas = document.createElement("canvas")
@@ -21,8 +24,9 @@ const draw_bitmap = (bitmap, colors=['#fff'], tile_w=8, tile_h=8) => {
 	canvas.height = bitmap.bitmap.length * tile_h
 	canvas.width = bitmap.bitmap[0].length * tile_w
 
+	let tileset = []
     const map = bitmap.bitmap
-    const tileset = bitmap.tileset
+	tileset = bitmap.tileset
 
 	for (const [bit_row_idx, row] of map.entries()) {
 		for (const [bit_col_idx, tile] of row.entries()) {
