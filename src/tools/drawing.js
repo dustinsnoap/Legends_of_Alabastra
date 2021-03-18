@@ -1,5 +1,5 @@
 //IMPORTS
-import {compress_tileset, decompress_tileset} from './compression'
+import {decompress_tileset} from './compression'
 
 //TOOLS
 const draw_tile = (tile, colors=['#fff'], w=8, h=8) => {
@@ -26,7 +26,7 @@ const draw_bitmap = (bitmap, colors=['#fff'], tile_w=8, tile_h=8) => {
 
 	let tileset = []
     const map = bitmap.bitmap
-	tileset = bitmap.tileset
+	tileset = typeof(bitmap.tileset) === 'string' ? decompress_tileset(bitmap.tileset) : bitmap.tileset
 
 	for (const [bit_row_idx, row] of map.entries()) {
 		for (const [bit_col_idx, tile] of row.entries()) {
