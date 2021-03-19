@@ -26,7 +26,8 @@ const draw_bitmap = (bitmap, colors=['#fff'], tile_w=8, tile_h=8) => {
 
 	let tileset = []
     const map = bitmap.bitmap
-	tileset = typeof(bitmap.tileset) === 'string' ? decompress_tileset(bitmap.tileset) : bitmap.tileset
+	// if(typeof(bitmap.bitmap) !== 'string') console.log('cts', compress_tileset(bitmap.tileset,2))
+	tileset = typeof(bitmap.tileset) === 'string' ? decompress_tileset(bitmap.tileset, bitmap.colors+1) : bitmap.tileset
 
 	for (const [bit_row_idx, row] of map.entries()) {
 		for (const [bit_col_idx, tile] of row.entries()) {
