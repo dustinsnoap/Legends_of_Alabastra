@@ -35,7 +35,7 @@ class Canvas extends Component {
         this.setState({
             assets: {
                 background: background(['#64b9f9', '#215786'], Math.ceil(window.innerWidth / (window.innerHeight / 240))),
-                wave: wave(['#5881a5','#3b6d97','#4878a0','#3d6d95'], 4, 75),
+                wave: wave(['#5881a5','#3b6d97','#4878a0','#3d6d95']),
                 horizon: horizon(['#cce8fd', '#b1deff', '#97d2fe', '#61a6dd', '#5682a5', '#47799e', '#3c6d95', '#2d638f'], Math.ceil(window.innerWidth / (window.innerHeight / 240))),
                 cloud: cloud(['#ffffff']),
                 title: title(['#8e6e00'])

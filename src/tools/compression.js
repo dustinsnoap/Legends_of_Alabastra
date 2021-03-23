@@ -58,25 +58,26 @@ export const decompress_tileset = (compressed_tileset, base) => {
     return tileset
 }
 
-export const decompress_tileset2 = compress_tileset => {
-    let tileset = []
-    let tile = []
-    Array.from(compress_tileset).forEach(char => {
-        let binary = char.charCodeAt(0)-20
-        binary = binary.toString(2)
-        binary = [...'0'.repeat(8-binary.length)+binary]
-        binary = binary.map(x => parseInt(x))
-        tile.push(binary)
-        if(tile.length === 8) {
-            tileset.push(tile)
-            tile = []
-        }
-    })
-    return tileset
-}
+// export const decompress_tileset2 = compress_tileset => {
+//     let tileset = []
+//     let tile = []
+//     Array.from(compress_tileset).forEach(char => {
+//         let binary = char.charCodeAt(0)-20
+//         binary = binary.toString(2)
+//         binary = [...'0'.repeat(8-binary.length)+binary]
+//         binary = binary.map(x => parseInt(x))
+//         tile.push(binary)
+//         if(tile.length === 8) {
+//             tileset.push(tile)
+//             tile = []
+//         }
+//     })
+//     return tileset
+// }
 
 export const compress_tileset = (tileset, base) => {
-    return tileset.reduce((acc, tile, i) => {
+    let compressed_tileset = tileset
+    return compressed_tileset.reduce((acc, tile, i) => {
         return acc + compress_tile(tile, base)
     }, '')
 }
