@@ -1,8 +1,7 @@
 //IMPORTS
 //STYLE
 const Style = `
-    .background {
-        background-color: #0383CA;
+    .canvas > canvas {
         image-rendering: pixelated;
         position: absolute;
             left: 0;

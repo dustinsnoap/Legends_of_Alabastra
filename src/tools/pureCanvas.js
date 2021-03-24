@@ -10,16 +10,17 @@ class PureCanvas extends Component {
     shouldComponentUpdate = () => false
     componentDidMount = () => {
         this.resize_canvas()
-        window.addEventListener('resize', this.resize_canvas)
+        window.addEventListener('resize', this.resize_canvas.bind(this))
     }
     componentWillUnmount = () => {
         window.removeEventListener('resize', this.resize_canvas)
     }
     resize_canvas = () => {
-        const canvas = document.getElementsByClassName('background')[0]
-        canvas.width = Math.ceil(240* window.innerWidth/window.innerHeight)
+        const canvas = document.querySelector(`.canvas > .${this.props.className}`)
+        canvas.width = Math.ceil(240 * window.innerWidth/window.innerHeight)
         canvas.height = 240
     }
+    handleChange = () => console.log('it changed!')
     render = () => 
         <canvas
             className={this.props.className}
