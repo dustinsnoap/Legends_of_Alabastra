@@ -17,18 +17,18 @@ const char = {
 
 const fill_empty_space = bitmap => {
     let max_length = 0
-    for(row of bitmap) if(row.length > max_length) max_length = row.length
-    for(i=0; i<bitmap.length; i++) {
+    for(let row of bitmap) if(row.length > max_length) max_length = row.length
+    for(let i=0; i<bitmap.length; i++) {
 			if(bitmap[i].length < max_length)
             bitmap[i] = bitmap[i].concat(Array(max_length-bitmap[i].length).fill(0))
     }
     return bitmap
 }
 
-export const string_bitmap = string => {
-    bitmap = []
-    row = []
-    for(c of string) {
+const string_bitmap = string => {
+    let bitmap = []
+    let row = []
+    for(let c of string) {
         if(c === " ") row.push(0)
         else if(c === "/") {
             bitmap.push(row)
@@ -44,3 +44,5 @@ export const string_bitmap = string => {
         bitmap: bitmap
     }
 }
+
+export default string_bitmap
