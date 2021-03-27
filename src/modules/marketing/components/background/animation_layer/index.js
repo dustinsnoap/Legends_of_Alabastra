@@ -56,12 +56,17 @@ class Animation extends Component {
             }
         rAFCallback()
     }
-    componentWillUnmount = () => cancelAnimationFrame(this.rAF)
+    componentWillUnmount = () => {
+        console.log('caneling...')
+        cancelAnimationFrame(this.rAF)
+    }
     //UTILS
     random_between = (min, max, precision=1) => Math.floor(Math.random() * (max * (1/precision) - min * (1/precision)) + min * (1/precision))/(1/precision)
     //DRAWING -- Initial object creation, size, position, etc.
     move_waves = () => {
-        const canvas_width = document.getElementsByClassName('background')[0].width
+        const canvas = document.getElementsByClassName('background')[0]
+        if(!canvas) return
+        const canvas_width = canvas.width
         const settings = this.state.settings
         this.setState(prev => {
             prev.waves.map(wave => wave.x < canvas_width ? wave.x += settings.waves.speed/settings.fps : this.create_wave(wave))
@@ -77,7 +82,9 @@ class Animation extends Component {
         return wave
     }
     move_clouds = () => {
-        const canvas_width = document.getElementsByClassName('background')[0].width
+        const canvas = document.getElementsByClassName('background')[0]
+        if(!canvas) return
+        const canvas_width = canvas.width
         const settings = this.state.settings
         this.setState(prev => {
             prev.clouds.map(cloud => cloud.x < canvas_width ? cloud.x += settings.clouds.speed/settings.fps : this.create_cloud(cloud))
